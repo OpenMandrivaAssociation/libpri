@@ -1,5 +1,5 @@
 %define	version 1.4.1
-%define	release %mkrel 1
+%define	release %mkrel 2
 %define	major 1
 %define libname	%mklibname pri %{major}
 
@@ -36,9 +36,9 @@ protocols on switches from Nortel and Lucent.
 %package -n	%{libname}-devel
 Summary:	Development libraries and headers for %{name}
 Group:		Development/C
-Provides:	%{name}-devel = %{version}
-Provides:	lib%{name}-devel = %{version}
-Requires:	%{libname} = %{version}
+Provides:	pri-devel = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
 
 %description -n	%{libname}-devel
 libpri is an implementation of the Primary Rate ISDN specification
