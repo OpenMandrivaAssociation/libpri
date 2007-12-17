@@ -13,7 +13,6 @@ URL:		http://www.asterisk.org/
 Source0:	http://ftp.digium.com/pub/libpri/%{name}-%{version}.tar.bz2
 Patch0:		libpri-1.2.3-mdv_conf.diff
 #BuildConflicts:	libpri-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
 libpri is a C implementation of the Primary Rate ISDN
