@@ -13,6 +13,7 @@ Source0:	http://ftp.digium.com/pub/libpri/%{name}-%{version}.tar.gz
 Patch0:		libpri-mdv_conf.diff
 BuildConflicts:	libpri-devel
 BuildRequires:	tonezone-devel
+BuildRequires:	zapata-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
