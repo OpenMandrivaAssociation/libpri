@@ -93,9 +93,13 @@ make \
 install -m0755 pridump %{buildroot}%{_sbindir}/
 install -m0755 pritest %{buildroot}%{_sbindir}/
 
+%if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun -n %{libname} -p /sbin/ldconfig
+%endif
 
 %clean
 rm -rf %{buildroot}
