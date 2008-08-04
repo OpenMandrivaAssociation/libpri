@@ -5,7 +5,7 @@
 Summary:	An implementation of Primate and Basic Rate ISDN
 Name:		libpri
 Version:	1.4.5
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPL
 Group:		System/Libraries
 URL:		http://www.asterisk.org/
