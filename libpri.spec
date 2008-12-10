@@ -4,7 +4,7 @@
 
 Summary:	An implementation of Primate and Basic Rate ISDN
 Name:		libpri
-Version:	1.4.7
+Version:	1.4.8
 Release:	%mkrel 1
 License:	GPL
 Group:		System/Libraries
