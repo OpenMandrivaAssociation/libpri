@@ -4,8 +4,8 @@
 
 Summary:	An implementation of Primate and Basic Rate ISDN
 Name:		libpri
-Version:	1.4.8
-Release:	%mkrel 2
+Version:	1.4.9
+Release:	%mkrel 1
 License:	GPL
 Group:		System/Libraries
 URL:		http://www.asterisk.org/
@@ -122,6 +122,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Feb 23 2009 Gergely Lonyai <aleph@mandriva.org> 1.4.9-1mdv2009.1
+- 1.4.9
+
 * Wed Dec 10 2008 Oden Eriksson <oeriksson@mandriva.com> 1.4.8-1mdv2009.1
 + Revision: 312532
 - 1.4.8
