@@ -1,18 +1,20 @@
-%define	major 1
+%define name libpri
+%define version 1.4.10.1
+%define release %mkrel 1
+%define major 1
 %define libname %mklibname pri %{major}
 %define develname %mklibname pri -d
 
 Summary:	An implementation of Primate and Basic Rate ISDN
-Name:		libpri
-Version:	1.4.9
-Release:	%mkrel 1
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
 License:	GPL
 Group:		System/Libraries
 URL:		http://www.asterisk.org/
 Source0:	http://ftp.digium.com/pub/libpri/%{name}-%{version}.tar.gz
 Patch0:		libpri-mdv_conf.diff
 Patch1:		libpri-1.4.8-dahdi_fix.diff
-BuildConflicts:	libpri-devel
 BuildRequires:	dahdi-devel
 BuildRequires:	zapata-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -40,7 +42,6 @@ Provides:	pri-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
-Obsoletes:	%{mklibname pri -d 1}
 
 %description -n	%{develname}
 libpri is an implementation of the Primary Rate ISDN specification (based on
