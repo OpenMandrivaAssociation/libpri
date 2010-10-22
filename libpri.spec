@@ -1,6 +1,7 @@
 %define name libpri
-%define version 1.4.11.4
-%define release %mkrel 1
+%define version 1.4.12
+%define beta beta2
+%define release %mkrel %{?beta:0.0.%{beta}.}1
 %define major 1
 %define libname %mklibname pri %{major}
 %define develname %mklibname pri -d
@@ -12,7 +13,7 @@ Release:	%{release}
 License:	GPL
 Group:		System/Libraries
 URL:		http://www.asterisk.org/
-Source0:	http://ftp.digium.com/pub/libpri/%{name}-%{version}.tar.gz
+Source0:	http://ftp.digium.com/pub/libpri/%{name}-%{version}%{?beta:-%{beta}}.tar.gz
 Patch0:		libpri-mdv_conf.diff
 Patch1:		libpri-1.4.8-dahdi_fix.diff
 BuildRequires:	dahdi-devel
@@ -60,7 +61,7 @@ Various tools for %{name} diagnostics
 
 %prep
 
-%setup -q
+%setup -q -n %{name}-%{version}%{?beta:-%{beta}}
 
 find . -type d -perm 0700 -exec chmod 755 {} \;
 find . -type d -perm 0555 -exec chmod 755 {} \;
