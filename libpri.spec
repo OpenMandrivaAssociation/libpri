@@ -1,6 +1,6 @@
 %define name libpri
 %define version 1.4.12
-%define beta beta2
+%define beta beta3
 %define release %mkrel %{?beta:0.0.%{beta}.}1
 %define major 1
 %define libname %mklibname pri %{major}
