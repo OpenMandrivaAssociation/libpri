@@ -1,6 +1,6 @@
 %define name libpri
 %define version 1.4.12
-%define beta beta3
+#define beta beta3
 %define release %mkrel %{?beta:0.0.%{beta}.}1
 %define major 1
 %define libname %mklibname pri %{major}
@@ -13,7 +13,7 @@ Release:	%{release}
 License:	GPL
 Group:		System/Libraries
 URL:		http://www.asterisk.org/
-Source0:	http://ftp.digium.com/pub/libpri/%{name}-%{version}%{?beta:-%{beta}}.tar.gz
+Source0:	http://downloads.asterisk.org/pub/telephony/libpri/%{name}-%{version}%{?beta:-%{beta}}.tar.gz
 Patch0:		libpri-mdv_conf.diff
 Patch1:		libpri-1.4.8-dahdi_fix.diff
 BuildRequires:	dahdi-devel
