@@ -1,0 +1,110 @@
+--- Makefile.orig	2011-02-01 01:37:49.000000000 +0100
++++ Makefile	2011-07-12 10:28:33.000000000 +0200
+@@ -34,10 +34,11 @@
+ # SONAME version; should be changed on every ABI change
+ # please don't change it needlessly; it's perfectly fine to have a SONAME
+ # of 1.2 and a version of 1.4.x
+-SONAME:=1.4
++MAJOR:=1
++MINOR:=4
+ 
+ STATIC_LIBRARY=libpri.a
+-DYNAMIC_LIBRARY:=libpri.so.$(SONAME)
++DYNAMIC_LIBRARY:=libpri.so.$(MAJOR).$(MINOR)
+ STATIC_OBJS= \
+ 	copy_string.o \
+ 	pri.o \
+@@ -90,7 +91,7 @@
+ 	rose_qsig_mwi.lo \
+ 	rose_qsig_name.lo \
+ 	version.lo
+-CFLAGS=-Wall -Werror -Wstrict-prototypes -Wmissing-prototypes -g -fPIC $(ALERTING) $(LIBPRI_OPT) $(COVERAGE_CFLAGS)
++CFLAGS=$(RPM_OPT_FLAGS) $(ALERTING) $(LIBPRI_OPT) $(COVERAGE_CFLAGS)
+ INSTALL_PREFIX=$(DESTDIR)
+ INSTALL_BASE=/usr
+ libdir?=$(INSTALL_BASE)/lib
+@@ -101,7 +102,7 @@
+   endif
+   LDCONFIG=/usr/bin/true
+ else
+-  SOFLAGS=-shared -Wl,-h$(DYNAMIC_LIBRARY) $(COVERAGE_LDFLAGS)
++  SOFLAGS=-shared -Wl,-soname=libpri.so.$(MAJOR) $(COVERAGE_LDFLAGS)
+   LDCONFIG = /sbin/ldconfig
+ endif
+ ifneq (,$(findstring X$(OSARCH)X, XLinuxX XGNU/kFreeBSDX XGNUX))
+@@ -164,44 +165,45 @@
+ 		echo "Not under version control";  \
+ 	fi
+ 
+-install: $(STATIC_LIBRARY) $(DYNAMIC_LIBRARY)
++install:
+ 	mkdir -p $(INSTALL_PREFIX)$(libdir)
+ 	mkdir -p $(INSTALL_PREFIX)$(INSTALL_BASE)/include
+ ifneq (${OSARCH},SunOS)
+ 	install -m 644 libpri.h $(INSTALL_PREFIX)$(INSTALL_BASE)/include
+ 	install -m 755 $(DYNAMIC_LIBRARY) $(INSTALL_PREFIX)$(libdir)
+ 	#if [ -x /usr/sbin/sestatus ] && ( /usr/sbin/sestatus | grep "SELinux status:" | grep -q "enabled"); then /sbin/restorecon -v $(INSTALL_PREFIX)$(libdir)/$(DYNAMIC_LIBRARY); fi
+-	( cd $(INSTALL_PREFIX)$(libdir) ; ln -sf libpri.so.$(SONAME) libpri.so)
++	( cd $(INSTALL_PREFIX)$(libdir) ; ln -snf $(DYNAMIC_LIBRARY) libpri.so.$(MAJOR) ; ln -snf libpri.so.$(MAJOR) libpri.so; )
+ 	install -m 644 $(STATIC_LIBRARY) $(INSTALL_PREFIX)$(libdir)
+ 	if test $$(id -u) = 0; then $(LDCONFIG) $(LDCONFIG_FLAGS) $(INSTALL_PREFIX)$(libdir); fi
+ else
+ 	install -f $(INSTALL_PREFIX)$(INSTALL_BASE)/include -m 644 libpri.h
+ 	install -f $(INSTALL_PREFIX)$(libdir) -m 755 $(DYNAMIC_LIBRARY)
+-	( cd $(INSTALL_PREFIX)$(libdir) ; ln -sf libpri.so.$(SONAME) libpri.so)
++	( cd $(INSTALL_PREFIX)$(libdir) ; ln -snf $(DYNAMIC_LIBRARY) libpri.so.$(MAJOR) ; ln -snf libpri.so.$(MAJOR) libpri.so)
+ 	install -f $(INSTALL_PREFIX)$(libdir) -m 644 $(STATIC_LIBRARY)
+ endif
+ 
+ uninstall:
+ 	@echo "Removing Libpri"
+-	rm -f $(INSTALL_PREFIX)$(libdir)/libpri.so.$(SONAME)
++	rm -f $(INSTALL_PREFIX)$(libdir)/$(DYNAMIC_LIBRARY)
++	m -f $(INSTALL_PREFIX)$(libdir)/libpri.so.$(MAJOR)
+ 	rm -f $(INSTALL_PREFIX)$(libdir)/libpri.so
+ 	rm -f $(INSTALL_PREFIX)$(libdir)/libpri.a
+ 	rm -f $(INSTALL_PREFIX)$(INSTALL_BASE)/include/libpri.h
+ 
+ pritest: pritest.o
+-	$(CC) -o pritest pritest.o -L. -lpri $(CFLAGS)
++	$(CC) $(CFLAGS) -o pritest pritest.o -L. -lpri $(CFLAGS)
+ 
+ testprilib.o: testprilib.c
+ 	$(CC) $(CFLAGS) -D_REENTRANT -D_GNU_SOURCE -o $@ -c $<
+ 
+ testprilib: testprilib.o
+-	$(CC) -o testprilib testprilib.o -L. -lpri -lpthread $(CFLAGS)
++	$(CC) $(CFLAGS) -o testprilib testprilib.o -L. -lpri -lpthread $(CFLAGS)
+ 
+ pridump: pridump.o
+-	$(CC) -o pridump pridump.o -L. -lpri $(CFLAGS)
++	$(CC) $(CFLAGS) -o pridump pridump.o -L. -lpri $(CFLAGS)
+ 
+ rosetest: rosetest.o
+-	$(CC) -o rosetest rosetest.o -L. -lpri $(CFLAGS)
++	$(CC) $(CFLAGS) -o rosetest rosetest.o -L. -lpri $(CFLAGS)
+ 
+ MAKE_DEPS= -MD -MT $@ -MF .$(subst /,_,$@).d -MP
+ 
+@@ -216,9 +218,9 @@
+ 	ranlib $(STATIC_LIBRARY)
+ 
+ $(DYNAMIC_LIBRARY): $(DYNAMIC_OBJS)
+-	$(CC) $(SOFLAGS) -o $@ $(DYNAMIC_OBJS)
+-	$(LDCONFIG) $(LDCONFIG_FLAGS) .
+-	ln -sf libpri.so.$(SONAME) libpri.so
++	$(CC) $(CFLAGS) $(SOFLAGS) -o $@ $(DYNAMIC_OBJS)
++	ln -snf $(DYNAMIC_LIBRARY) libpri.so.$(MAJOR)
++	ln -snf libpri.so.$(MAJOR) libpri.so
+ 
+ version.c: FORCE
+ 	@build_tools/make_version_c > $@.tmp
+@@ -226,7 +228,7 @@
+ 	@rm -f $@.tmp
+ 
+ clean:
+-	rm -f *.o *.so *.lo *.so.$(SONAME)
++	rm -f *.o *.so *.lo *.so.$(MAJOR)
+ 	rm -f testprilib $(STATIC_LIBRARY) $(DYNAMIC_LIBRARY)
+ 	rm -f pritest pridump
+ 	rm -f .*.d
