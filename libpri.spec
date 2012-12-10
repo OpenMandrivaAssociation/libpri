@@ -123,9 +123,45 @@ rm -rf %{buildroot}
 %{_libdir}/*.a
 
 
+
+
 %changelog
-* Fri Feb 23 2009 Gergely Lonyai <aleph@mandriva.org> 1.4.9-1mdv2009.1
+* Tue Jul 12 2011 Lonyai Gergely <aleph@mandriva.org> 1.4.12-1mdv2011
++ Revision: 689670
+- 1.4.12
+
+* Tue Nov 23 2010 Lonyai Gergely <aleph@mandriva.org> 1.4.12-0.0.beta3.1mdv2011.0
++ Revision: 599914
+- 1.4.12-beta3
+
+* Fri Oct 22 2010 Lonyai Gergely <aleph@mandriva.org> 1.4.12-0.0.beta2.1mdv2011.0
++ Revision: 587232
+- 1.4.12-beta2
+
+* Mon Sep 13 2010 Lonyai Gergely <aleph@mandriva.org> 1.4.11.4-1mdv2011.0
++ Revision: 577909
+- 1.4.11.4
+
+* Sat Jul 10 2010 Lonyai Gergely <aleph@mandriva.org> 1.4.11.3-1mdv2011.0
++ Revision: 550162
+- 1.4.11.3
+  rediff P0
+
+* Wed Jan 06 2010 Lonyai Gergely <aleph@mandriva.org> 1.4.10.2-1mdv2010.1
++ Revision: 486609
+- 1.4.10.2
+
+* Mon Jul 13 2009 Lonyai Gergely <aleph@mandriva.org> 1.4.10.1-1mdv2010.0
++ Revision: 395465
+- update to 1.4.10.1
+
+* Mon Feb 23 2009 Lonyai Gergely <aleph@mandriva.org> 1.4.9-1mdv2009.1
++ Revision: 344257
 - 1.4.9
+
+* Thu Dec 11 2008 Oden Eriksson <oeriksson@mandriva.com> 1.4.8-2mdv2009.1
++ Revision: 312904
+- fix build
 
 * Wed Dec 10 2008 Oden Eriksson <oeriksson@mandriva.com> 1.4.8-1mdv2009.1
 + Revision: 312532
@@ -161,7 +197,7 @@ rm -rf %{buildroot}
   + Olivier Blin <oblin@mandriva.com>
     - restore BuildRoot
 
-  + Thierry Vignaud <tvignaud@mandriva.com>
+  + Thierry Vignaud <tv@mandriva.org>
     - kill re-definition of %%buildroot on Pixel's request
 
 * Sat Dec 15 2007 Stefan van der Eijk <stefan@mandriva.org> 1.4.3-1mdv2008.1
