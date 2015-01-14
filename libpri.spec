@@ -12,7 +12,6 @@ Group:		System/Libraries
 URL:		http://www.asterisk.org/
 Source0:	http://downloads.asterisk.org/pub/telephony/libpri/%{name}-%{version}%{?beta:-%{beta}}.tar.gz
 BuildRequires:	dahdi-devel
-BuildRequires:	zapata-devel
 
 %description
 libpri is a C implementation of the Primary Rate ISDN specification. It was
