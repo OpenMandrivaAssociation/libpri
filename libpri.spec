@@ -9,7 +9,7 @@ Version:	1.4.14
 Release:	11
 License:	GPL
 Group:		System/Libraries
-URL:		http://www.asterisk.org/
+URL:		https://www.asterisk.org/
 Source0:	http://downloads.asterisk.org/pub/telephony/libpri/%{name}-%{version}%{?beta:-%{beta}}.tar.gz
 BuildRequires:	dahdi-devel
 
