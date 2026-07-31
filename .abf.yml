@@ -1,4 +1,3 @@
-removed_sources:
-  libpri-1.4.12.tar.gz: 20db95cbc358ab5ca83f32f8275d59e60e03d7af
 sources:
-  libpri-1.4.14.tar.gz: 7c080c1d18004aec0f9749138a36a42361fbd7bd
+  libpri-1.4.12.tar.gz: 20db95cbc358ab5ca83f32f8275d59e60e03d7af
+  libpri-1.6.1.tar.gz: 028cb99c4fc77477f18d52fa171e8320514ef6ed
